@@ -7,11 +7,13 @@ import { CartItemType } from "../types/CartItemType";
 
 interface CartContextLayout{
     userCart: CartItemType[],
+    userCartTotal: number,
     onAddUserCart: (meal: MealType, amount: number) => void
 }
 
 const CartContext = React.createContext<CartContextLayout>({
     userCart: [],
+    userCartTotal: 0,
     onAddUserCart: () => {}
 });
 
@@ -32,11 +34,37 @@ export function CartContextProvider(props: CartContextProviderProps){
     }, [userCart, userCartTotal]);
 
     function addUserCartHandler(meal: MealType, amount: number){
+        // setUserCart((prevState) => {
+        //     return [
+        //         ...prevState,
+        //         {meal, amount}
+        //     ]
+        // });
+
         setUserCart((prevState) => {
-            return [
-                ...prevState,
-                {meal, amount}
-            ]
+            let nextState: CartItemType[] = [];
+
+            const index = prevState.findIndex((item) => {
+                return item.meal.id === meal.id;
+            });
+
+            if(index > -1){
+                // meal is already present in the cart, just need to add to the amount
+                nextState = [
+                    ...prevState
+                ]
+
+                nextState[index].amount += amount;
+            }
+            else{
+                // meal is not yet present in the cart
+                nextState = [
+                    ...prevState,
+                    {meal, amount}
+                ]
+            }
+
+            return nextState;
         });
 
         setUserCartTotal(((prevState) => {
@@ -49,6 +77,7 @@ export function CartContextProvider(props: CartContextProviderProps){
     return(
         <CartContext.Provider value={{
             userCart: userCart,
+            userCartTotal: userCartTotal,
             onAddUserCart: addUserCartHandler
         }}>
             {props.children}
