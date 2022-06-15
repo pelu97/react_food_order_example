@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import CartContext from "../../data/CartContext";
 import CartModal from "./CartModal";
@@ -9,7 +9,23 @@ import classes from "./CartButton.module.css";
 
 function CartButton() {
     const [modalActive, setModalActive] = useState(false);
+    const [animationActive, setAnimationActive] = useState(false);
     const context = useContext(CartContext);
+
+    useEffect(() => {
+        console.log("Setting animation to active");
+        setAnimationActive(true);
+
+        setTimeout(() => {
+            console.log("Setting animation to inactive");
+            setAnimationActive(false);
+        }, 300);
+
+        // return(() => {
+        //     setAnimationActive(false);
+        //     console.log("Setting animation to inactive");
+        // });
+    }, [context.userCartTotal]);
 
     function openModal(){
         setModalActive(true);
@@ -21,7 +37,7 @@ function CartButton() {
 
     return(
         <div>
-            <button className={classes.button} onClick={openModal}>
+            <button className={`${classes.button} ${animationActive ? classes.bump : ""}`} onClick={openModal}>
                 <CartIcon/>
                 Your Cart
                 <span className={classes.badge}>{context.userCartTotal.amount}</span>
