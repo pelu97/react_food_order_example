@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import CartContext from "../../data/CartContext";
 import CartItem from "./CartItem";
+import Modal from "../Ui/Modal";
 
 import classes from "./CartModal.module.css";
 
@@ -22,20 +23,21 @@ function CartModal(props: CartModalProps){
     }
 
     return(
-        <div>
-            <div className={classes.modal}>
+        <Modal onCancel={cancelHandler}>
+            <div>
                 <h3>Cart Modal</h3>
-                <ul>
+                <ul className={classes["cart-items"]}>
                     {context.userCart.map((item) => {
                         return <CartItem item={item} key={item.meal.id}/>;
                     })}
                 </ul>
 
-                <button onClick={cancelHandler}>Cancel</button>
-                <button onClick={confirmHandler}>Order</button>
+                <div className={classes.actions}>
+                    <button onClick={cancelHandler}>Cancel</button>
+                    <button onClick={confirmHandler}>Order</button>
+                </div>
             </div>
-            <div className={classes.backdrop} onClick={cancelHandler}/>
-        </div>
+        </Modal>
 
     );
 }
