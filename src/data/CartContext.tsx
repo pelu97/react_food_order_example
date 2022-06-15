@@ -7,7 +7,7 @@ import { CartItemType } from "../types/CartItemType";
 
 interface CartContextLayout{
     userCart: CartItemType[],
-    userCartTotal: number,
+    userCartTotal: {amount: number, price: number},
     onAddUserCart: (meal: MealType, amount: number) => void,
     onIncrementItem: (id: string) => void
     onDecrementItem: (id: string) => void
@@ -15,7 +15,7 @@ interface CartContextLayout{
 
 const CartContext = React.createContext<CartContextLayout>({
     userCart: [],
-    userCartTotal: 0,
+    userCartTotal: {amount: 0, price: 0},
     onAddUserCart: () => {},
     onIncrementItem: () => {},
     onDecrementItem: () => {}
@@ -29,7 +29,7 @@ interface CartContextProviderProps{
 
 export function CartContextProvider(props: CartContextProviderProps){
     const [userCart, setUserCart] = useState<CartItemType[]>([]);
-    const [userCartTotal, setUserCartTotal] = useState(0);
+    const [userCartTotal, setUserCartTotal] = useState({amount: 0, price: 0});
 
     // effect just for loggin the cart state after updating it
     useEffect(() => {
@@ -76,7 +76,10 @@ export function CartContextProvider(props: CartContextProviderProps){
         });
 
         setUserCartTotal(((prevState) => {
-            return prevState + amount;
+            return {
+                amount: prevState.amount + amount,
+                price: prevState.price + (amount * meal.price)
+            };
         }));
 
         // console.log(userCart);
@@ -85,6 +88,7 @@ export function CartContextProvider(props: CartContextProviderProps){
 
     function onIncrementItemHandler(id: string){
         // console.log("Incrementing meal with id: " + id);
+        let mealPrice = 0;
 
         // same logic as addUserCartHandler, but simpler, only incrementing a meal that should already be in the cart
         setUserCart((prevState) => {
@@ -111,7 +115,8 @@ export function CartContextProvider(props: CartContextProviderProps){
                         item
                     ;
                 });
-                console.log("Index: " + index + " - New amount: " + nextState[index].amount);
+                // console.log("Index: " + index + " - New amount: " + nextState[index].amount);
+                mealPrice = prevState[index].meal.price;
             }
             else{
                 // meal should be in the cart for this function to execute. If not found, it's an error
@@ -122,11 +127,15 @@ export function CartContextProvider(props: CartContextProviderProps){
         });
 
         setUserCartTotal(((prevState) => {
-            return prevState + 1;
+            return {
+                amount: prevState.amount + 1,
+                price: prevState.price + (1 * mealPrice)
+            };
         }));
     }
 
     function onDecrementItemHandler(id: string){
+        let mealPrice = 0;
 
         // same logic as addUserCartHandler, but simpler, only decrementing a meal that should already be in the cart
         // if the amount is 1, meal should be removed instead of decrementing
@@ -139,6 +148,8 @@ export function CartContextProvider(props: CartContextProviderProps){
 
             if(index > -1){
                 // only 1 item, remove from the cart completely
+                mealPrice = prevState[index].meal.price;
+
                 if(prevState[index].amount === 1){
                     nextState = prevState.filter((item) => {
                         return item.meal.id !== id;
@@ -165,7 +176,10 @@ export function CartContextProvider(props: CartContextProviderProps){
         });
 
         setUserCartTotal(((prevState) => {
-            return prevState - 1;
+            return {
+                amount: prevState.amount - 1,
+                price: prevState.price - (1 * mealPrice)
+            };
         }));
     }
 

@@ -22,7 +22,7 @@ function CartButton() {
         <div>
             <button className={classes.button} onClick={openModal}>
                 Your Cart
-                <span className={classes.badge}>{context.userCartTotal}</span>
+                <span className={classes.badge}>{context.userCartTotal.amount}</span>
             </button>
             {modalActive ? <CartModal onCancel={closeModal}/> : ""}
         </div>
