@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 
 import CartContext from "../../data/CartContext";
 import CartModal from "./CartModal";
+import CartIcon from "../Ui/Icons/CartIcon";
 
 import classes from "./CartButton.module.css";
 
@@ -21,6 +22,7 @@ function CartButton() {
     return(
         <div>
             <button className={classes.button} onClick={openModal}>
+                <CartIcon/>
                 Your Cart
                 <span className={classes.badge}>{context.userCartTotal.amount}</span>
             </button>
