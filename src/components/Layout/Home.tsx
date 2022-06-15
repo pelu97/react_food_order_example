@@ -1,7 +1,7 @@
 import { MealType } from "../../types/MealType";
 
 import MealList from "../Meal/MealList";
-import Header from "../Ui/Header";
+import Header from "./Header";
 import Card from "../Ui/Card";
 
 import classes from "./Home.module.css";

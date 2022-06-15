@@ -1,7 +1,7 @@
 // import React from 'react';
 
 import { CartContextProvider } from "./data/CartContext";
-import Home from "./components/Home/Home";
+import Home from "./components/Layout/Home";
 
 import { DUMMY_MEALS } from "./data/DUMMY_MEALS";
 

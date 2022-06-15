@@ -34,7 +34,7 @@ function CartModal(props: CartModalProps){
     return(
         <Modal onCancel={cancelHandler}>
             <div>
-                <h3>Cart Modal</h3>
+                <h3>Your Cart</h3>
                 <ul className={classes["cart-items"]}>
                     {context.userCart.map((item) => {
                         return <CartItem item={item} key={item.meal.id} onAdd={addMeal} onRemove={removeMeal}/>;

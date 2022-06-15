@@ -8,13 +8,11 @@ import classes from "./Header.module.css";
 function Header(){
     return(
         <div>
-            <div className={classes.header}>
+            <header className={classes.header}>
                 <h2>Delivery Name Placeholder</h2>
                 <CartButton/>
-            </div>
-
+            </header>
         </div>
-
     );
 }
 
