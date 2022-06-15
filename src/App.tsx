@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 import { CartContextProvider } from "./data/CartContext";
 import Home from "./components/Home/Home";

@@ -22,13 +22,22 @@ function CartModal(props: CartModalProps){
         console.log("Placing order...");
     }
 
+    function addMeal(id: string){
+        context.onIncrementItem(id);
+    }
+
+    function removeMeal(id: string){
+        context.onDecrementItem(id);
+    }
+
+
     return(
         <Modal onCancel={cancelHandler}>
             <div>
                 <h3>Cart Modal</h3>
                 <ul className={classes["cart-items"]}>
                     {context.userCart.map((item) => {
-                        return <CartItem item={item} key={item.meal.id}/>;
+                        return <CartItem item={item} key={item.meal.id} onAdd={addMeal} onRemove={removeMeal}/>;
                     })}
                 </ul>
 
