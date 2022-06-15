@@ -16,7 +16,7 @@ function Home(props: HomeProps){
     return(
         <div>
             <Header/>
-            <img alt="meals background" src={mealsImage}/>
+            <img className={classes["main-image"]} alt="meals background" src={mealsImage}/>
             <Card className={classes.summary}>
                 <h2>Delivery Slogan Placeholder</h2>
 
