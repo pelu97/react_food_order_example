@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Input from "../Ui/Input";
+
 import classes from "./MealItemForm.module.css";
 
 
@@ -20,12 +22,14 @@ function MealItemForm(props: MealItemFormProps){
         setAmountInput(+value);
     }
 
+    // <label htmlFor="amount">Amount</label>
+    // <input id="amount" type="number" value={amountInput} onChange={(event) => {
+    //     onAmountChange(event.target.value);
+    // }}/>
+
     return(
         <form className={classes.form}>
-            <label htmlFor="amount">Amount</label>
-            <input id="amount" type="number" value={amountInput} onChange={(event) => {
-                onAmountChange(event.target.value);
-            }}/>
+            <Input id="amount" label="Amount" type="number" value={amountInput.toString()} onChange={onAmountChange}/>
             <button type="button" onClick={(event) => {
                 event.preventDefault();
                 onAddHandler();
