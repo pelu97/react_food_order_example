@@ -40,10 +40,13 @@ function CartModal(props: CartModalProps){
                         return <CartItem item={item} key={item.meal.id} onAdd={addMeal} onRemove={removeMeal}/>;
                     })}
                 </ul>
-
+                <div className={classes.total}>
+                    <div>Total Amount</div>
+                    <div>{`$${context.userCartTotal.price.toFixed(2)}`}</div>
+                </div>
                 <div className={classes.actions}>
-                    <button onClick={cancelHandler}>Cancel</button>
-                    <button onClick={confirmHandler}>Order</button>
+                    <button className={classes["button--alt"]} onClick={cancelHandler}>Cancel</button>
+                    <button className={classes.button} onClick={confirmHandler}>Order</button>
                 </div>
             </div>
         </Modal>

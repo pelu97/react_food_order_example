@@ -15,8 +15,8 @@ export const DUMMY_MEALS : MealType[] = [
   },
   {
     id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
+    name: 'Cheese Burger',
+    description: 'Comes with fries',
     price: 12.99,
   },
   {

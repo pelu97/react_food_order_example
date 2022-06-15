@@ -23,8 +23,8 @@ function CartItem(props: CartItemProps){
     return(
         <li className={classes["cart-item"]}>
             <h2>{props.item.meal.name}</h2>
-            <div className={classes.amount}>{props.item.amount}</div>
-            <div className={classes.price}>{props.item.meal.price}</div>
+            <div className={classes.amount}>{`x ${props.item.amount}`}</div>
+            <div className={classes.price}>{`$${props.item.meal.price.toFixed(2)}`}</div>
             <div className={classes.actions}>
                 <button type="button" onClick={addMeal}>+</button>
                 <button type="button" onClick={removeMeal}>-</button>
