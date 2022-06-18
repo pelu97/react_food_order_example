@@ -32,8 +32,8 @@ function MealItem(props: MealItemProps){
                 {`$${props.meal.price.toFixed(2)}`}
             </div>
         </div>
-        
-            <MealItemForm onAdd={addToCartHandler}/>
+
+            <MealItemForm id={props.meal.id} onAdd={addToCartHandler}/>
         </li>
     );
 }

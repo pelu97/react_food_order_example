@@ -8,6 +8,8 @@ interface InputProps{
     id: string
     label: string,
     value?: string,
+    min?: string,
+    max?: string
     onChange: (value: string) => void
 }
 
@@ -15,7 +17,7 @@ function Input(props: InputProps){
     return (
         <div className={classes.input}>
             <label htmlFor={props.id}>{props.label}</label>
-            <input type={props.type} value={props.value} onChange={(event) => {
+            <input id={props.id} type={props.type} value={props.value} min={props.min} max={props.max} onChange={(event) => {
                 props.onChange(event.target.value);
             }}/>
         </div>

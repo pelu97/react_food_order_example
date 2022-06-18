@@ -41,12 +41,16 @@ function CartModal(props: CartModalProps){
                     })}
                 </ul>
                 <div className={classes.total}>
-                    <div>Total Amount</div>
-                    <div>{`$${context.userCartTotal.price.toFixed(2)}`}</div>
+                    <span>Total Amount</span>
+                    <span>{`$${context.userCartTotal.price.toFixed(2)}`}</span>
                 </div>
                 <div className={classes.actions}>
                     <button className={classes["button--alt"]} onClick={cancelHandler}>Cancel</button>
-                    <button className={classes.button} onClick={confirmHandler}>Order</button>
+                    {
+                        context.userCartTotal.amount !== 0
+                        ? <button className={classes.button} onClick={confirmHandler}>Order</button>
+                        : ""
+                    }
                 </div>
             </div>
         </Modal>

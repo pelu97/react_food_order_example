@@ -3,6 +3,8 @@ import { MealType } from "../../types/MealType";
 import MealItem from "./MealItem";
 import Card from "../Ui/Card";
 
+import classes from "./MealList.module.css";
+
 
 interface MealListProps{
     meals: MealType[]
@@ -10,7 +12,7 @@ interface MealListProps{
 
 function MealList(props: MealListProps){
     return(
-        <Card>
+        <Card className={classes.meals}>
             <ul>
                 {
                     props.meals.map((meal) => {

@@ -25,6 +25,10 @@ function CartButton() {
         //     setAnimationActive(false);
         //     console.log("Setting animation to inactive");
         // });
+
+        // return (() => {
+        //     clearTimeout(timer);
+        // });
     }, [context.userCartTotal]);
 
     function openModal(){
@@ -38,8 +42,8 @@ function CartButton() {
     return(
         <div>
             <button className={`${classes.button} ${animationActive ? classes.bump : ""}`} onClick={openModal}>
-                <CartIcon/>
-                Your Cart
+                <span className={classes.icon}><CartIcon/></span>
+                <span>Your Cart</span>
                 <span className={classes.badge}>{context.userCartTotal.amount}</span>
             </button>
             {modalActive ? <CartModal onCancel={closeModal}/> : ""}

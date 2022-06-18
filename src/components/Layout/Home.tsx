@@ -16,15 +16,17 @@ function Home(props: HomeProps){
     return(
         <div>
             <Header/>
-            <img className={classes["main-image"]} alt="meals background" src={mealsImage}/>
+            <div className={classes["main-image"]}>
+                <img alt="Table full of meals" src={mealsImage}/>
+            </div>
             <Card className={classes.summary}>
                 <h2>Delivery Slogan Placeholder</h2>
 
                 <p>Choose your favorite meal from our broad selection of available dishes and enjoy a delicious lunch or dinner at home.</p>
             </Card>
-
-
-            <MealList meals={props.menu}/>
+            <main>
+                <MealList meals={props.menu}/>
+            </main>
         </div>
     );
 }

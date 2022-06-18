@@ -6,6 +6,7 @@ import classes from "./MealItemForm.module.css";
 
 
 interface MealItemFormProps{
+    id: string,
     onAdd: (amount: number) => void
 }
 
@@ -28,12 +29,12 @@ function MealItemForm(props: MealItemFormProps){
     // }}/>
 
     return(
-        <form className={classes.form}>
-            <Input id="amount" label="Amount" type="number" value={amountInput.toString()} onChange={onAmountChange}/>
-            <button type="button" onClick={(event) => {
-                event.preventDefault();
-                onAddHandler();
-            }}>Add</button>
+        <form className={classes.form} onSubmit={(event) => {
+            event.preventDefault();
+            onAddHandler();
+        }}>
+            <Input id={"amount" + props.id} label="Amount" type="number" value={amountInput.toString()} min="1" max="10" onChange={onAmountChange}/>
+            <button type="submit">Add</button>
         </form>
     );
 }
