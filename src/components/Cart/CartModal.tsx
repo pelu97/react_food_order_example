@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import CartContext from "../../data/CartContext";
 import CartItem from "./CartItem";
 import Modal from "../Ui/Modal";
+import OrderModal from "../Order/OrderModal";
 
 import classes from "./CartModal.module.css";
 
@@ -13,6 +14,12 @@ interface CartModalProps{
 
 function CartModal(props: CartModalProps){
     const context = useContext(CartContext);
+    const [orderModalActive, setOrderModalActive] = useState(false);
+
+    const newOrder = context.userCart.map((item) => {
+        return {mealId: item.meal.id, amount: item.amount};
+    });
+
 
     function cancelHandler(){
         props.onCancel();
@@ -20,6 +27,7 @@ function CartModal(props: CartModalProps){
 
     function confirmHandler(){
         console.log("Placing order...");
+        openOrderModal();
     }
 
     function addMeal(id: string){
@@ -30,6 +38,18 @@ function CartModal(props: CartModalProps){
         context.onDecrementItem(id);
     }
 
+    function openOrderModal(){
+        setOrderModalActive(true);
+    }
+
+    function orderModalCancelHandler(){
+        setOrderModalActive(false);
+    }
+
+    function orderModalSuccessHandler(){
+        setOrderModalActive(false);
+        context.onClearCart();
+    }
 
     return(
         <Modal onCancel={cancelHandler}>
@@ -53,6 +73,10 @@ function CartModal(props: CartModalProps){
                     }
                 </div>
             </div>
+
+            {orderModalActive &&
+                <OrderModal onCancel={orderModalCancelHandler} onSuccess={orderModalSuccessHandler} cartMeals={newOrder} orderTotal={context.userCartTotal}/>
+            }
         </Modal>
 
     );
