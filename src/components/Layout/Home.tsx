@@ -9,10 +9,36 @@ import classes from "./Home.module.css";
 import mealsImage from "../../assets/img/meals.jpg";
 
 interface HomeProps{
-    menu: MealType[]
+    menu: MealType[],
+    isLoading: boolean,
+    error: string|null
 }
 
 function Home(props: HomeProps){
+    const loadingMessage = (
+        <Card className={classes.loading}>
+            <p>Loading menu...</p>
+        </Card>
+    );
+
+    const errorMessage = (
+        <Card className={classes.error}>
+            <p>{props.error}</p>
+        </Card>
+    );
+
+    let content;
+
+    if(props.isLoading){
+        content = loadingMessage;
+    }
+    else if(props.error){
+        content = errorMessage;
+    }
+    else{
+        content = <MealList meals={props.menu}/>;
+    }
+
     return(
         <div>
             <Header/>
@@ -25,7 +51,7 @@ function Home(props: HomeProps){
                 <p>Choose your favorite meal from our broad selection of available dishes and enjoy a delicious lunch or dinner at home.</p>
             </Card>
             <main>
-                <MealList meals={props.menu}/>
+                {content}
             </main>
         </div>
     );

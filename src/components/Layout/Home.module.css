@@ -30,3 +30,13 @@
     object-fit: cover;
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
+
+.loading, .error{
+    max-width: 60rem;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
