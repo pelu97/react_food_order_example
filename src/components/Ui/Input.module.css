@@ -1,4 +1,4 @@
-.input {
+.input, .input--alt{
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
@@ -9,10 +9,34 @@
     margin-right: 1rem;
 }
 
+.input--alt label {
+    width: 13%;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
 .input input {
     width: 3rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     font: inherit;
     padding-left: 0.5rem;
+}
+
+.input--alt input {
+    width: 87%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font: inherit;
+    padding-left: 0.5rem;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
 }
