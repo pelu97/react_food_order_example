@@ -13,11 +13,11 @@ function CartButton() {
     const context = useContext(CartContext);
 
     useEffect(() => {
-        console.log("Setting animation to active");
+        // console.log("Setting animation to active");
         setAnimationActive(true);
 
         setTimeout(() => {
-            console.log("Setting animation to inactive");
+            // console.log("Setting animation to inactive");
             setAnimationActive(false);
         }, 300);
 
