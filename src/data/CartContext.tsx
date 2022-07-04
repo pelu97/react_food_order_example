@@ -9,8 +9,9 @@ interface CartContextLayout{
     userCart: CartItemType[],
     userCartTotal: {amount: number, price: number},
     onAddUserCart: (meal: MealType, amount: number) => void,
-    onIncrementItem: (id: string) => void
-    onDecrementItem: (id: string) => void
+    onIncrementItem: (id: string) => void,
+    onDecrementItem: (id: string) => void,
+    onClearCart: () => void
 }
 
 const CartContext = React.createContext<CartContextLayout>({
@@ -18,7 +19,8 @@ const CartContext = React.createContext<CartContextLayout>({
     userCartTotal: {amount: 0, price: 0},
     onAddUserCart: () => {},
     onIncrementItem: () => {},
-    onDecrementItem: () => {}
+    onDecrementItem: () => {},
+    onClearCart: () => {}
 });
 
 
@@ -184,6 +186,11 @@ export function CartContextProvider(props: CartContextProviderProps){
     }
 
 
+    function onClearCartHandler(){
+        setUserCart([]);
+        setUserCartTotal({amount: 0, price: 0});
+    }
+
 
     return(
         <CartContext.Provider value={{
@@ -191,7 +198,8 @@ export function CartContextProvider(props: CartContextProviderProps){
             userCartTotal: userCartTotal,
             onAddUserCart: addUserCartHandler,
             onIncrementItem: onIncrementItemHandler,
-            onDecrementItem: onDecrementItemHandler
+            onDecrementItem: onDecrementItemHandler,
+            onClearCart: onClearCartHandler
         }}>
             {props.children}
         </CartContext.Provider>
